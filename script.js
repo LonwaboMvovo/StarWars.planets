@@ -26,10 +26,18 @@ async function fetchPlanets() {
     }
   }
 
+  sessionStorage.planetInfo = JSON.stringify(planetInfo);
   loading.style.display = 'none';
   showPlanets(planetIndex);
 }
-fetchPlanets();
+
+if (sessionStorage.planetInfo === undefined) {
+  fetchPlanets();
+} else {
+  planetInfo = JSON.parse(sessionStorage.planetInfo);
+  loading.style.display = 'none';
+  showPlanets(planetIndex);
+}
 
 
 const prev = document.querySelector('#prev');
@@ -51,14 +59,14 @@ function showPlanets(n) {
   if (n < 1) {planetIndex = 61};
   numbertext.textContent  = `${planetIndex} / ${61}`;
   planet_name.textContent = planetInfo[planetIndex - 1].name;
-  rotation_period.textContent = planetInfo[planetIndex - 1].rotation_period;
-  orbital_period.textContent = planetInfo[planetIndex - 1].orbital_period;
-  diameter.textContent = planetInfo[planetIndex - 1].diameter;
-  climate.textContent = planetInfo[planetIndex - 1].climate;
-  gravity.textContent = planetInfo[planetIndex - 1].gravity;
-  terrain.textContent = planetInfo[planetIndex - 1].terrain; 
-  surface_water.textContent = planetInfo[planetIndex - 1].surface_water;
-  population.textContent = planetInfo[planetIndex - 1].population;
+  rotation_period.textContent = `Rotation Period: ${planetInfo[planetIndex - 1].rotation_period} hrs`;
+  orbital_period.textContent = `Obital Period: ${planetInfo[planetIndex - 1].orbital_period} days`;
+  diameter.textContent = `Diameter: ${planetInfo[planetIndex - 1].diameter} km`;
+  climate.textContent = `Climate: ${planetInfo[planetIndex - 1].climate}`;
+  gravity.textContent = `Gravity: ${planetInfo[planetIndex - 1].gravity} G`;
+  terrain.textContent = `Terrain: ${planetInfo[planetIndex - 1].terrain}`; 
+  surface_water.textContent = `Surface Water: ${planetInfo[planetIndex - 1].surface_water} %`;
+  population.textContent = `Population: ${planetInfo[planetIndex - 1].population}`;
 }
 
 // add space background
