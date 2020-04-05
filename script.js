@@ -10,6 +10,8 @@ const terrain = document.querySelector('#terrain');
 const surface_water = document.querySelector('#surface_water');
 const population = document.querySelector('#population');
 const loading = document.querySelector('#loading');
+const searchPlanet = document.querySelector('#searchPlanet');
+const planetList = document.querySelector('#planetList');
 
 let planetIndex = 1;
 
@@ -39,6 +41,32 @@ if (sessionStorage.planetInfo === undefined) {
   showPlanets(planetIndex);
 }
 
+const showPlanetList = () => {
+  let filter = searchPlanet.value.toUpperCase();
+  let planets = planetList.getElementsByTagName('li');
+  console.log(planets);
+  let searchValue;
+  for (k = 0; k < planets.length; k++) {
+    searchValue = planets[k].textContent || planets[k].innerText;
+    if (searchValue.toUpperCase().indexOf(filter) > -1) {
+      planets[k].style.display = 'block';
+    } else {
+      planets[k].style.display = 'none';
+    }
+  }
+}
+
+searchPlanet.addEventListener('focus', () => {
+  planetList.style.display = 'block';
+})
+
+searchPlanet.addEventListener('keyup', () => {
+  showPlanetList();
+})
+
+searchPlanet.addEventListener('focusout', () => {
+  planetList.style.display = 'none';
+})
 
 const prev = document.querySelector('#prev');
 prev.addEventListener('click', () => {
@@ -69,8 +97,10 @@ function showPlanets(n) {
   population.textContent = `Population: ${planetInfo[planetIndex - 1].population}`;
 }
 
+
+// add search
 // add space background
-// Light saber loading: https://codemyui.com/lightsaber-progress-bar/ or https://www.mockplus.com/blog/post/progress-bar-design
+// Light saber loading: https://codemyui.com/lightsaber-progress-bar/ or https://www.mockplus.com/blog/post/progress-bar-design, or I'm thinking hyerdrive background with normal loading bar when loading. hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
 // maybe remove number index
 // add typing css for when planet info appears: https://codepen.io/Bojoer/pen/EZYgeO
 // add fade to planet images
