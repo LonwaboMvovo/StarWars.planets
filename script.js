@@ -14,8 +14,17 @@ const searchPlanet = document.querySelector('#searchPlanet');
 const planetList = document.querySelector('#planetList');
 
 let planetIndex = 1;
-
 let planetInfo = [];
+
+const addPlanetNames = () => {
+  for (int = 0; int < 61; int++) {
+    planetNameAdded = planetInfo[int].name;
+    li = document.createElement('li');
+    li.appendChild(document.createTextNode(planetNameAdded));
+    planetList.appendChild(li);
+  }
+}
+
 async function fetchPlanets() {
   for (j = 1; j <= 61; j++) {
     let url = 'https://swapi.co/api/planets/' + j + '/';
@@ -35,19 +44,20 @@ async function fetchPlanets() {
 
 if (sessionStorage.planetInfo === undefined) {
   fetchPlanets();
+  addPlanetNames();
 } else {
   planetInfo = JSON.parse(sessionStorage.planetInfo);
   loading.style.display = 'none';
+  addPlanetNames();
   showPlanets(planetIndex);
 }
 
 const showPlanetList = () => {
   let filter = searchPlanet.value.toUpperCase();
   let planets = planetList.getElementsByTagName('li');
-  console.log(planets);
   let searchValue;
   for (k = 0; k < planets.length; k++) {
-    searchValue = planets[k].textContent || planets[k].innerText;
+    searchValue = planets[k].textContent;
     if (searchValue.toUpperCase().indexOf(filter) > -1) {
       planets[k].style.display = 'block';
     } else {
@@ -97,7 +107,7 @@ function showPlanets(n) {
   population.textContent = `Population: ${planetInfo[planetIndex - 1].population}`;
 }
 
-
+//search must have display none when loading
 // add search
 // add space background
 // Light saber loading: https://codemyui.com/lightsaber-progress-bar/ or https://www.mockplus.com/blog/post/progress-bar-design, or I'm thinking hyerdrive background with normal loading bar when loading. hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
