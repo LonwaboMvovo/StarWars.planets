@@ -5,16 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Wars Planets</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poller+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="planets-container"> 
     <h1 id="loading">Loading</h1>
+    <div id="progress">
+      <div id="progressBar"></div>
+    </div>
     <div class="myPlanets fade">
       <div id="numbertext"></div>
       <div id="search">
-        <input type="text" id="searchPlanet" placeholder="Search for planets..." title="Type in a planet">
+        <input type="text" id="searchPlanet" placeholder="Search for planets..." title="Type in a Star Wars planet">
         <ul id="planetList"></ul>
       </div>
+      <h1 id="title">Star Wars Planets</h1>
       <h1 id="planet-name"></h1>
       <div>
         <h2 class="info" id="rotation_period"></h2>

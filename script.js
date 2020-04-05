@@ -13,9 +13,13 @@ const loading = document.querySelector('#loading');
 const searchPlanet = document.querySelector('#searchPlanet');
 const planetList = document.querySelector('#planetList');
 const shufflePlanets = document.querySelectorAll('.shufflePlanets');
+const title = document.querySelector('#title');
+const progress = document.querySelector('#progress');
+const progressBar = document.querySelector('#progressBar');
 
 let planetIndex = 1;
 let planetInfo = [];
+let load = 1;
 
 const addPlanetNames = () => {
   for (int = 0; int < 61; int++) {
@@ -26,6 +30,12 @@ const addPlanetNames = () => {
   }
 }
 
+const updateProgress = (PP) => {
+  load = (PP*100);
+  progressBar.style.width = load + "%";
+  
+}
+
 async function fetchPlanets() {
   for (j = 1; j <= 61; j++) {
     let url = 'https://swapi.co/api/planets/' + j + '/';
@@ -34,12 +44,15 @@ async function fetchPlanets() {
       let data = await respPlanet.json();
       planetInfo.push(data);
     } catch (err) {
-      alert('Oops!: ' + err);
+      alert('Oops!: ' + err + 'Try refreshing');
     }
+    updateProgress(j/61);
   }
 
   sessionStorage.planetInfo = JSON.stringify(planetInfo);
   loading.style.display = 'none';
+  progress.style.display = 'none';
+  title.style.display = 'block';
   searchPlanet.style.display = 'block';
   shufflePlanets[0].style.display = 'inline';
   shufflePlanets[1].style.display = 'inline';
@@ -52,6 +65,8 @@ if (sessionStorage.planetInfo === undefined) {
 } else {
   planetInfo = JSON.parse(sessionStorage.planetInfo);
   loading.style.display = 'none';
+  progress.style.display = 'none';
+  title.style.display = 'block';
   searchPlanet.style.display = 'block';
   shufflePlanets[0].style.display = 'inline';
   shufflePlanets[1].style.display = 'inline';
@@ -115,10 +130,7 @@ function showPlanets(n) {
 }
 
 
-// change fonts 
-// add space background
-// Light saber loading: https://codemyui.com/lightsaber-progress-bar/ or https://www.mockplus.com/blog/post/progress-bar-design, or I'm thinking hyerdrive background with normal loading bar when loading. hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
-// maybe remove number index
+// add functionallity to search to take you to planet details
+// hyperdrive background when switching planets: hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
 // add typing css for when planet info appears: https://codepen.io/Bojoer/pen/EZYgeO
 // make responsive
-// maybe usefull things here: https://swfanon.fandom.com/wiki/Battle_of_Alderaan_(Galactic_Civil_War)

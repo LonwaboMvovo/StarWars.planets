@@ -1,23 +1,54 @@
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
+* {
+  box-sizing: border-box
+}
+
+::selection {
+  background: #8C92AC;
+}
+
+body {
+  background-color: #001f3f;
+  color: white;
+  font-family: 'Share Tech Mono', monospace;
+  margin:0
+}
 
 h1#loading {
-  text-shadow: 0px 0px 4px rgb(255, 255, 255);
+  text-shadow: 0 0 9px lime;
   z-index: 3;
   font-size: 70px;
+  margin: 0px;
+  position: absolute;
+  top: 35%;
+  margin-top: -42.5px;
+  left: 50%;
+  margin-left: -155.555px;
+}
+
+#progress {
   margin: 0px;
   position: absolute;
   top: 50%;
   margin-top: -42.5px;
   left: 50%;
-  margin-left: -155.555px;
+  margin-left: -337.25px;
+  width: 50%;
+  background-color: #242a34;
+  border-radius: 15px;
+}
+
+#progressBar {
+  width: 1%;
+  height: 30px;
+  border-radius: 15px;
+  background-color: lime;
+  box-shadow: 0 0 15px lime;
 }
 
 /* Slideshow container */
 .planets-container {
   width: 100vw;
   height: 100vh;
-  background-color: #29323c;
 }
 
 /* Next & previous buttons */
@@ -29,7 +60,6 @@ h1#loading {
   width: auto;
   padding: 16px;
   margin-top: -22px;
-  color: white;
   font-weight: bold;
   font-size: 32px;
   transition: 0.6s ease;
@@ -52,25 +82,40 @@ h1#loading {
 #numbertext {
   color: #f2f2f2;
   font-size: 2vw;
-  padding: 8px 12px;
+  font-family: 'Poller One', cursive;
+  padding: 22px 22px;
   position: absolute;
   top: 0;
 }
 
-h1#planet-name {
+h1#title {
+  display: none;
+  font-family: 'Audiowide', cursive;
   margin: 0px;
-  padding-top: 40px;
+  padding-top: 30px;
+  text-align: center;
+  color: #ffe300;
+  width: 100vw;
+  font-size: 4vw;
+}
+
+h1#planet-name {
+  color: white;
+  margin: 0px;
+  padding-top: 5vh;
   text-align: center;
 }
 
 h2.info {
+  color: white;
   text-align: center;
 }
 
 #search {
+  font-family: arial;
   position: absolute;
   top: 40px;
-  right: 60px
+  right: 60px;
 }
 
 #searchPlanet {
@@ -78,10 +123,10 @@ h2.info {
   background-image: url('images/search_icon.png');
   background-position: 10px 12px;
   background-repeat: no-repeat;
-  width: 250px;
+  width: 210px;
   font-size: 16px;
   padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
+  border: 3px solid rgb(151, 151, 151);
 }
 
 #planetList {
@@ -114,6 +159,18 @@ h2.info {
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 @-webkit-keyframes fade {
