@@ -12,6 +12,7 @@ const population = document.querySelector('#population');
 const loading = document.querySelector('#loading');
 const searchPlanet = document.querySelector('#searchPlanet');
 const planetList = document.querySelector('#planetList');
+const shufflePlanets = document.querySelectorAll('.shufflePlanets');
 
 let planetIndex = 1;
 let planetInfo = [];
@@ -39,15 +40,21 @@ async function fetchPlanets() {
 
   sessionStorage.planetInfo = JSON.stringify(planetInfo);
   loading.style.display = 'none';
+  searchPlanet.style.display = 'block';
+  shufflePlanets[0].style.display = 'inline';
+  shufflePlanets[1].style.display = 'inline';
+  addPlanetNames();
   showPlanets(planetIndex);
 }
 
 if (sessionStorage.planetInfo === undefined) {
   fetchPlanets();
-  addPlanetNames();
 } else {
   planetInfo = JSON.parse(sessionStorage.planetInfo);
   loading.style.display = 'none';
+  searchPlanet.style.display = 'block';
+  shufflePlanets[0].style.display = 'inline';
+  shufflePlanets[1].style.display = 'inline';
   addPlanetNames();
   showPlanets(planetIndex);
 }
@@ -107,12 +114,11 @@ function showPlanets(n) {
   population.textContent = `Population: ${planetInfo[planetIndex - 1].population}`;
 }
 
-//search must have display none when loading
-// add search
+
+// change fonts 
 // add space background
 // Light saber loading: https://codemyui.com/lightsaber-progress-bar/ or https://www.mockplus.com/blog/post/progress-bar-design, or I'm thinking hyerdrive background with normal loading bar when loading. hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
 // maybe remove number index
 // add typing css for when planet info appears: https://codepen.io/Bojoer/pen/EZYgeO
-// add fade to planet images
 // make responsive
 // maybe usefull things here: https://swfanon.fandom.com/wiki/Battle_of_Alderaan_(Galactic_Civil_War)

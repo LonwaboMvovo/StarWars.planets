@@ -18,11 +18,11 @@ h1#loading {
   width: 100vw;
   height: 100vh;
   background-color: #29323c;
-  /* background-image: linear-gradient(to right, #29323c , #485563); */
 }
 
 /* Next & previous buttons */
 #prev, #next {
+  display: none;
   cursor: pointer;
   position: absolute;
   top: 45%;
@@ -74,6 +74,7 @@ h2.info {
 }
 
 #searchPlanet {
+  display: none;
   background-image: url('images/search_icon.png');
   background-position: 10px 12px;
   background-repeat: no-repeat;
