@@ -16,7 +16,7 @@ let planetIndex = 1;
 let planetInfo = [];
 async function fetchPlanets() {
   for (j = 1; j <= 61; j++) {
-    let url = 'https://swapi.co/api/planets/' + j;
+    let url = 'https://swapi.co/api/planets/' + j + '/';
     try {
       let respPlanet = await fetch(url);
       let data = await respPlanet.json();
