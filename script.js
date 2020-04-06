@@ -9,6 +9,8 @@ const gravity = document.querySelector('#gravity');
 const terrain = document.querySelector('#terrain');
 const surface_water = document.querySelector('#surface_water');
 const population = document.querySelector('#population');
+const residents = document.querySelector('#residents');
+const films = document.querySelector('#films');
 const loading = document.querySelector('#loading');
 const searchPlanet = document.querySelector('#searchPlanet');
 const planetList = document.querySelector('#planetList');
@@ -50,6 +52,26 @@ async function fetchPlanets() {
     try {
       let respPlanet = await fetch(url);
       let data = await respPlanet.json();
+      if (data.residents !== []) {
+        let respResidents = await Promise.all(data.residents.map(async function(resUrl) {
+          const givenResident = await fetch(resUrl);
+          return givenResident.json();
+        }));
+        respResidents = respResidents.map(names => {
+          return names.name;
+        });
+        data.residents = respResidents;
+      }
+      if (data.films !== []) {
+        let respFilms = await Promise.all(data.films.map(async function(filmUrl) {
+          const givenFilm = await fetch(filmUrl);
+          return givenFilm.json();
+        }));
+        respFilms = respFilms.map(films => {
+          return films.title;
+        });
+        data.films = respFilms;
+      }
       planetInfo.push(data);
     } catch (err) {
       alert('Oops!: ' + err + 'Try refreshing');
@@ -138,13 +160,35 @@ function showPlanets(n) {
   terrain.textContent = `Terrain: ${planetInfo[planetIndex - 1].terrain}`; 
   surface_water.textContent = `Surface Water: ${planetInfo[planetIndex - 1].surface_water} %`;
   population.textContent = `Population: ${planetInfo[planetIndex - 1].population}`;
+  residents.textContent = `Residents: ${planetInfo[planetIndex - 1].residents}`;
+  films.textContent = `Films: ${planetInfo[planetIndex - 1].films}`;
+  films
 }
 
 
-// add films to info of the planets
 // move things that need to be vertically centered back to true 50%
 // throw error to test what to do if something wrong happens. When reload happens and the sessionStorage is not full then call fetchPlanets and if error reload.
 // bb8 or r2d2 on the loading and he must rotate
 // hyperdrive background when switching planets: hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
 // add typing css for when planet info appears: https://codepen.io/Bojoer/pen/EZYgeO
 // make responsive
+
+// let planetInfo = [];
+
+// async function fetchPlanets() {
+//   for (j = 1; j <= 61; j++) {
+//     let url = 'https://swapi.co/api/planets/' + j + '/';
+//     try {
+//       let respPlanet = await fetch(url);
+//       let data = await respPlanet.json();
+//       planetInfo.push(data);
+//     } catch (err) {
+//       alert('Oops!: ' + err + ' Try refreshing');
+//     }
+//   }
+
+//   sessionStorage.planetInfo = JSON.stringify(planetInfo);
+//   console.log(planetInfo);
+// }
+
+// fetchPlanets();
