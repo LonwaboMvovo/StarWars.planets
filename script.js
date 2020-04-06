@@ -1,6 +1,7 @@
 const myPlanet = document.querySelector(".myPlanet");
 const numbertext = document.querySelector("#numbertext");
 const planet_name = document.querySelector('#planet-name');
+const all_planets_info = document.querySelector('#all_planets_info');
 const rotation_period = document.querySelector('#rotation_period');
 const orbital_period = document.querySelector('#orbital_period');
 const diameter = document.querySelector('#diameter');
@@ -12,6 +13,7 @@ const population = document.querySelector('#population');
 const residents = document.querySelector('#residents');
 const films = document.querySelector('#films');
 const loading = document.querySelector('#loading');
+const bb8 = document.querySelector('.bb8');
 const searchPlanet = document.querySelector('#searchPlanet');
 const planetList = document.querySelector('#planetList');
 const shufflePlanets = document.querySelectorAll('.shufflePlanets');
@@ -43,7 +45,7 @@ const addPlanetNames = () => {
 const updateProgress = (PP) => {
   load = (PP*100);
   progressBar.style.width = load + "%";
-  
+  bb8.style.left = progressBar.style.width.slice(0, -1) * 6.83 - 50 + 'px';
 }
 
 async function fetchPlanets() {
@@ -83,6 +85,7 @@ async function fetchPlanets() {
   loading.style.display = 'none';
   progress.style.display = 'none';
   title.style.display = 'block';
+  all_planets_info.style.display = 'block';
   searchPlanet.style.display = 'block';
   shufflePlanets[0].style.display = 'inline';
   shufflePlanets[1].style.display = 'inline';
@@ -97,6 +100,7 @@ if (sessionStorage.planetInfo === undefined) {
   loading.style.display = 'none';
   progress.style.display = 'none';
   title.style.display = 'block';
+  all_planets_info.style.display = 'block';
   searchPlanet.style.display = 'block';
   shufflePlanets[0].style.display = 'inline';
   shufflePlanets[1].style.display = 'inline';
@@ -152,43 +156,22 @@ function showPlanets(n) {
   }
   numbertext.textContent  = `${planetIndex} / ${planetInfo.length}`;
   planet_name.textContent = planetInfo[planetIndex - 1].name;
-  rotation_period.textContent = `Rotation Period: ${planetInfo[planetIndex - 1].rotation_period} hrs`;
-  orbital_period.textContent = `Obital Period: ${planetInfo[planetIndex - 1].orbital_period} days`;
-  diameter.textContent = `Diameter: ${planetInfo[planetIndex - 1].diameter} km`;
-  climate.textContent = `Climate: ${planetInfo[planetIndex - 1].climate}`;
-  gravity.textContent = `Gravity: ${planetInfo[planetIndex - 1].gravity} G`;
-  terrain.textContent = `Terrain: ${planetInfo[planetIndex - 1].terrain}`; 
-  surface_water.textContent = `Surface Water: ${planetInfo[planetIndex - 1].surface_water} %`;
-  population.textContent = `Population: ${planetInfo[planetIndex - 1].population}`;
-  residents.textContent = `Residents: ${planetInfo[planetIndex - 1].residents}`;
-  films.textContent = `Films: ${planetInfo[planetIndex - 1].films}`;
+  rotation_period.innerHTML  = `<span class="info_title">Rotation Period: </span>${planetInfo[planetIndex - 1].rotation_period} hrs`;
+  orbital_period.innerHTML  = `<span class="info_title">Obital Period: </span>${planetInfo[planetIndex - 1].orbital_period} days`;
+  diameter.innerHTML  = `<span class="info_title">Diameter: </span>${planetInfo[planetIndex - 1].diameter} km`;
+  climate.innerHTML  = `<span class="info_title">Climate: </span>${planetInfo[planetIndex - 1].climate}`;
+  gravity.innerHTML  = `<span class="info_title">Gravity: </span>${planetInfo[planetIndex - 1].gravity} G`;
+  terrain.innerHTML  = `<span class="info_title">Terrain: </span>${planetInfo[planetIndex - 1].terrain}`; 
+  surface_water.innerHTML  = `<span class="info_title">Surface Water: </span>${planetInfo[planetIndex - 1].surface_water} %`;
+  population.innerHTML  = `<span class="info_title">Population: </span>${planetInfo[planetIndex - 1].population}`;
+  residents.innerHTML  = `<span class="info_title">Residents: </span>${planetInfo[planetIndex - 1].residents}`;
+  films.innerHTML  = `<span class="info_title">Films: </span>${planetInfo[planetIndex - 1].films}`;
   films
 }
 
 
-// move things that need to be vertically centered back to true 50%
-// throw error to test what to do if something wrong happens. When reload happens and the sessionStorage is not full then call fetchPlanets and if error reload.
-// bb8 or r2d2 on the loading and he must rotate
-// hyperdrive background when switching planets: hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
+
 // add typing css for when planet info appears: https://codepen.io/Bojoer/pen/EZYgeO
+// hyperdrive background when switching planets: hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
+// throw error to test what to do if something wrong happens. When reload happens and the sessionStorage is not full then call fetchPlanets and if error reload.
 // make responsive
-
-// let planetInfo = [];
-
-// async function fetchPlanets() {
-//   for (j = 1; j <= 61; j++) {
-//     let url = 'https://swapi.co/api/planets/' + j + '/';
-//     try {
-//       let respPlanet = await fetch(url);
-//       let data = await respPlanet.json();
-//       planetInfo.push(data);
-//     } catch (err) {
-//       alert('Oops!: ' + err + ' Try refreshing');
-//     }
-//   }
-
-//   sessionStorage.planetInfo = JSON.stringify(planetInfo);
-//   console.log(planetInfo);
-// }
-
-// fetchPlanets();
