@@ -21,12 +21,20 @@ let planetIndex = 1;
 let planetInfo = [];
 let load = 1;
 
+function showThisPlanet() {
+  let myPlanetId = this.id;
+  showPlanets(myPlanetId);
+  planetList.style.display = 'none';
+}
+
 const addPlanetNames = () => {
   for (int = 0; int < 61; int++) {
     planetNameAdded = planetInfo[int].name;
     li = document.createElement('li');
     li.appendChild(document.createTextNode(planetNameAdded));
     planetList.appendChild(li);
+    li.id = int + 1;
+    li.addEventListener('click', showThisPlanet);
   }
 }
 
@@ -96,10 +104,6 @@ searchPlanet.addEventListener('keyup', () => {
   showPlanetList();
 })
 
-searchPlanet.addEventListener('focusout', () => {
-  planetList.style.display = 'none';
-})
-
 const prev = document.querySelector('#prev');
 prev.addEventListener('click', () => {
   showPlanets(planetIndex += -1);
@@ -115,9 +119,16 @@ const currentSlide = (n) => {
 }
 
 function showPlanets(n) {
-  if (n > 61) {planetIndex = 1};   
-  if (n < 1) {planetIndex = 61};
-  numbertext.textContent  = `${planetIndex} / ${61}`;
+  if (n > planetInfo.length) {
+    planetIndex = 1;
+  }   
+  else if (n < 1) {
+    planetIndex = planetInfo.length;
+  }
+  else {
+    planetIndex = n;
+  }
+  numbertext.textContent  = `${planetIndex} / ${planetInfo.length}`;
   planet_name.textContent = planetInfo[planetIndex - 1].name;
   rotation_period.textContent = `Rotation Period: ${planetInfo[planetIndex - 1].rotation_period} hrs`;
   orbital_period.textContent = `Obital Period: ${planetInfo[planetIndex - 1].orbital_period} days`;
@@ -130,7 +141,10 @@ function showPlanets(n) {
 }
 
 
-// add functionallity to search to take you to planet details
+// add films to info of the planets
+// move things that need to be vertically centered back to true 50%
+// throw error to test what to do if something wrong happens. When reload happens and the sessionStorage is not full then call fetchPlanets and if error reload.
+// bb8 or r2d2 on the loading and he must rotate
 // hyperdrive background when switching planets: hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
 // add typing css for when planet info appears: https://codepen.io/Bojoer/pen/EZYgeO
 // make responsive
