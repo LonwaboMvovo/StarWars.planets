@@ -27,21 +27,11 @@ h1#loading {
   margin: 0px;
   text-align: center;
   padding-bottom: 30px;
-  /* position: absolute;
-  top: 40vh;
-  margin-top: -42.5px;
-  left: 50%;
-  margin-left: -155.555px; */
 }
 
 #progress {
   margin: 0px;
   margin: auto;
-  /* position: absolute;
-  top: 50vh; */
-  /* margin-top: -42.5px; */
-  /* left: 50%;
-  margin-left: -40%; */
   background-color: #242a34;
   border-radius: 15px;
 }
@@ -197,7 +187,7 @@ span.info_title {
   height: 75px;
   position: relative;
   top: -20px;
-  left: -20px;
+  left: -50px;
 }
 .bb8Head{
   width: 27px;
@@ -406,14 +396,12 @@ span.info_title {
 
 @media only screen and (max-width: 500px) {
   #searchPlanet {
-    width: 0px;
     height: 0px;
     background-position: 18px 2px;
   }
 
   #search {
     top: 5px;
-    right: 10px;
   }
 
   h1#loading {
@@ -424,8 +412,3 @@ span.info_title {
     font-size: 1rem;
   }
 }
-
-/* On smaller screens, decrease text size
-@media only screen and (max-width: 300px) {
-  #prev, #next {font-size: 11px}
-} */
