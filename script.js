@@ -17,6 +17,7 @@ const body = document.getElementsByTagName('body')[0];
 const scene = document.querySelector('.scene');
 const loading = document.querySelector('#loading');
 const bb8 = document.querySelector('.bb8');
+const planets_container = document.querySelector('.planets-container');
 const searchPlanet = document.querySelector('#searchPlanet');
 const prev = document.querySelector('#prev');
 const next = document.querySelector('#next');
@@ -69,7 +70,12 @@ const hyperdrive = () => {
   html.style.overflow = 'hidden';
   body.style.overflow = 'hidden';
 
+  body.style.background = '#000';
+  body.style.textAlign = 'center';
+
   body.classList.add('before_ish');
+
+  planets_container.style.display = 'none';
   
   setTimeout(() => {
     prev.style.display = 'inline';
@@ -87,8 +93,13 @@ const hyperdrive = () => {
     html.style.overflow = '';
     body.style.overflow = '';
 
+    body.style.background = '#001f3f';
+    body.style.textAlign = '';
+
     body.classList.remove('before_ish');
-  }, 500)
+
+    planets_container.style.display = '';
+  }, 1000)
 }
 
 async function fetchPlanets() {
@@ -119,7 +130,7 @@ async function fetchPlanets() {
       }
       planetInfo.push(data);
     } catch (err) {
-      alert('Oops! Error: /n' + err + '/n Try reloading the page');
+      alert('Oops! Error: /n' + err + '/n Try reloading the page or try again within a few minutes');
     }
     updateProgress(j/61);
   }
@@ -127,7 +138,6 @@ async function fetchPlanets() {
   sessionStorage.planetInfo = JSON.stringify(planetInfo);
   loading.style.display = 'none';
   progress.style.display = 'none';
-  hyperdrive();
   title.style.display = 'block';
   all_planets_info.style.display = 'block';
   searchPlanet.style.display = 'block';
@@ -137,13 +147,12 @@ async function fetchPlanets() {
   showPlanets(planetIndex);
 }
 
-if (sessionStorage.planetInfo === undefined) {
+if (sessionStorage.planetInfo === undefined || JSON.parse(sessionStorage.planetInfo).length < 61) {
   fetchPlanets();
 } else {
   planetInfo = JSON.parse(sessionStorage.planetInfo);
   loading.style.display = 'none';
   progress.style.display = 'none';
-  hyperdrive();
   title.style.display = 'block';
   all_planets_info.style.display = 'block';
   searchPlanet.style.display = 'block';
@@ -176,12 +185,10 @@ searchPlanet.addEventListener('keyup', () => {
 })
 
 prev.addEventListener('click', () => {
-  hyperdrive();
   showPlanets(planetIndex += -1);
 })
 
 next.addEventListener('click', () => {
-  hyperdrive();
   showPlanets(planetIndex += 1);
 })
 
@@ -190,6 +197,8 @@ const currentSlide = (n) => {
 }
 
 function showPlanets(n) {
+  hyperdrive();
+
   if (n > planetInfo.length) {
     planetIndex = 1;
   }   
