@@ -1,3 +1,4 @@
+const body = document.getElementsByTagName('body')[0];
 const myPlanet = document.querySelector(".myPlanet");
 const numbertext = document.querySelector("#numbertext");
 const planet_name = document.querySelector('#planet-name');
@@ -15,6 +16,7 @@ const films = document.querySelector('#films');
 const loading = document.querySelector('#loading');
 const bb8 = document.querySelector('.bb8');
 const planets_container = document.querySelector('.planets-container');
+const search = document.querySelector('#search');
 const searchPlanet = document.querySelector('#searchPlanet');
 const prev = document.querySelector('#prev');
 const next = document.querySelector('#next');
@@ -26,12 +28,12 @@ const progressBar = document.querySelector('#progressBar');
 
 let planetIndex = 1;
 let planetInfo = [];
-let load = 1;
 
 function showThisPlanet() {
   let myPlanetId = this.id;
   showPlanets(myPlanetId);
   planetList.style.display = 'none';
+  search.style.right = '';
 }
 
 const addPlanetNames = () => {
@@ -46,9 +48,8 @@ const addPlanetNames = () => {
 }
 
 const updateProgress = (PP) => {
-  load = (PP*100);
-  progressBar.style.width = load + "%";
-  bb8.style.left = progressBar.style.width.slice(0, -1) * 6.83 - 50 + 'px';
+  progressBar.style.width = (PP*100) + "%";
+  bb8.style.left = (progress.clientWidth * PP - 50) + 'px';
 }
 
 async function fetchPlanets() {
@@ -79,7 +80,7 @@ async function fetchPlanets() {
       }
       planetInfo.push(data);
     } catch (err) {
-      alert('Oops! Error: /n' + err + '/n Try reloading the page or try again within a few minutes');
+      alert('Oops! Error: \n' + err + '\n Try reloading the page or try again within a few minutes');
     }
     updateProgress(j/61);
   }
@@ -127,6 +128,14 @@ const showPlanetList = () => {
 
 searchPlanet.addEventListener('focus', () => {
   planetList.style.display = 'block';
+  if (body.clientWidth === 500) {
+    search.style.right = '15%';
+  }
+})
+
+planets_container.addEventListener('click', () => {
+  planetList.style.display = 'none';
+  search.style.right = '';
 })
 
 searchPlanet.addEventListener('keyup', () => {
@@ -134,11 +143,11 @@ searchPlanet.addEventListener('keyup', () => {
 })
 
 prev.addEventListener('click', () => {
-  showPlanets(planetIndex += -1);
+  showPlanets(planetIndex - 1);
 })
 
 next.addEventListener('click', () => {
-  showPlanets(planetIndex += 1);
+  showPlanets(planetIndex + 1);
 })
 
 const currentSlide = (n) => {
@@ -169,5 +178,3 @@ function showPlanets(n) {
   films.innerHTML  = `<span class="info_title">Films: </span>${planetInfo[planetIndex - 1].films}`;
   films
 }
-
-// make responsive
