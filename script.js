@@ -12,9 +12,6 @@ const surface_water = document.querySelector('#surface_water');
 const population = document.querySelector('#population');
 const residents = document.querySelector('#residents');
 const films = document.querySelector('#films');
-const html = document.getElementsByTagName('html')[0];
-const body = document.getElementsByTagName('body')[0];
-const scene = document.querySelector('.scene');
 const loading = document.querySelector('#loading');
 const bb8 = document.querySelector('.bb8');
 const planets_container = document.querySelector('.planets-container');
@@ -52,54 +49,6 @@ const updateProgress = (PP) => {
   load = (PP*100);
   progressBar.style.width = load + "%";
   bb8.style.left = progressBar.style.width.slice(0, -1) * 6.83 - 50 + 'px';
-}
-
-const hyperdrive = () => {
-  prev.style.display = 'none';
-  next.style.display = 'none';
-  searchPlanet.style.display = 'none';
-  numbertext.style.display = 'none';
-
-  scene.style.display = 'inline-block'
-  scene.innerHTML = '<div class="wrap"><div class="wall wall-right"></div><div class="wall wall-left"></div><div class="wall wall-top"></div><div class="wall wall-bottom"></div><div class="wall wall-back"></div></div><div class="wrap"><div class="wall wall-right"></div><div class="wall wall-left"></div><div class="wall wall-top"></div><div class="wall wall-bottom"></div><div class="wall wall-back"></div></div>';
-
-  html.style.height = '100%';
-  body.style.height = '100%';
-  html.style.width = '100%';
-  body.style.width = '100%';
-  html.style.overflow = 'hidden';
-  body.style.overflow = 'hidden';
-
-  body.style.background = '#000';
-  body.style.textAlign = 'center';
-
-  body.classList.add('before_ish');
-
-  planets_container.style.display = 'none';
-  
-  setTimeout(() => {
-    prev.style.display = 'inline';
-    next.style.display = 'inline';
-    searchPlanet.style.display = 'block';
-    numbertext.style.display = 'block';
-    
-    scene.style.display = 'none';
-    scene.innerHTML = '';
-
-    html.style.height = '';
-    body.style.height = '';
-    html.style.width = '';
-    body.style.width = '';
-    html.style.overflow = '';
-    body.style.overflow = '';
-
-    body.style.background = '#001f3f';
-    body.style.textAlign = '';
-
-    body.classList.remove('before_ish');
-
-    planets_container.style.display = '';
-  }, 1000)
 }
 
 async function fetchPlanets() {
@@ -197,8 +146,6 @@ const currentSlide = (n) => {
 }
 
 function showPlanets(n) {
-  hyperdrive();
-
   if (n > planetInfo.length) {
     planetIndex = 1;
   }   
