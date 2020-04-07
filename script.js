@@ -119,7 +119,7 @@ async function fetchPlanets() {
       }
       planetInfo.push(data);
     } catch (err) {
-      console.log('Oops! Error:' + err + ' Try reloading the page');
+      alert('Oops! Error: /n' + err + '/n Try reloading the page');
     }
     updateProgress(j/61);
   }
@@ -214,7 +214,4 @@ function showPlanets(n) {
   films
 }
 
-
-// hyperdrive background when switching planets: hyperdrive-background: https://codepen.io/noahblon/pen/GKflw
-// throw error to test what to do if something wrong happens. When reload happens and the sessionStorage is not full then call fetchPlanets and if error reload.
 // make responsive
