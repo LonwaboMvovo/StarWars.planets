@@ -80,7 +80,7 @@ async function fetchPlanets() {
       }
       planetInfo.push(data);
     } catch (err) {
-      alert(`Error: ${err} \n The Star Wars API may be down. Reload the page or try again later`);
+      alert(`${err} \n The Star Wars API may be down. Reload the page or try again later`);
     }
     updateProgress(j/61);
   }
